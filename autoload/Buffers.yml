@@ -10,6 +10,6 @@ base_task:
             - join
             - pipe: awk 'BEGIN {print "select"} {print}'
         alt-d:
-            - pipe: awk '{print $1}'
-            - join
+            - pipe: awk '{print "#"$1}'
+            - join: ','
             - pipe: awk 'BEGIN {print "diff"} {print}'

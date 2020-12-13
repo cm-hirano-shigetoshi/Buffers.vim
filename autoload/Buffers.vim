@@ -16,16 +16,20 @@ function! Buffers#Buffers()
             let lines = readfile(s:tmpfile)
             if len(lines) == 2
                 if lines[0] == 'select'
-                    execute("b " . split(lines[1], ' ')[0])
+                    for num in split(lines[1], ' ')
+                        execute("b " . num)
+                    endfor
                 elseif lines[0] == 'delete'
                     execute("bd " . lines[1])
                 elseif lines[0] == 'diff'
-                    if len(split(lines[1], ' ')) == 1
-                        execute("vertical diffsplit #" . lines[1])
+                    if len(split(lines[1], ',')) == 1
+                        execute("vertical diffsplit " . lines[1])
                     else
-                        let sp = split(lines[1], ' ')
-                        execute("b " . sp[0])
-                        execute("vertical diffsplit #" . sp[1])
+                        let sp = split(lines[1], ',')
+                        execute("b " . sp[0][1:])
+                        for num in sp[1:]
+                            execute("vertical diffsplit " . num)
+                        endfor
                     endif
                 endif
                 redraw!
