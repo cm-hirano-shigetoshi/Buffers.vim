@@ -14,8 +14,20 @@ function! Buffers#Buffers()
         function! OnFzfExit(job_id, data, event)
             bd!
             let lines = readfile(s:tmpfile)
-            if len(lines) > 0
-                execute("b" . lines[0])
+            if len(lines) == 2
+                if lines[0] == 'select'
+                    execute("b " . split(lines[1], ' ')[0])
+                elseif lines[0] == 'delete'
+                    execute("bd " . lines[1])
+                elseif lines[0] == 'diff'
+                    if len(split(lines[1], ' ')) == 1
+                        execute("vertical diffsplit #" . lines[1])
+                    else
+                        let sp = split(lines[1], ' ')
+                        execute("b " . sp[0])
+                        execute("vertical diffsplit #" . sp[1])
+                    endif
+                endif
                 redraw!
             endif
         endfunction

@@ -1,8 +1,15 @@
 base_task:
     source: cat -
     options:
+        - multi
         - reverse
         - preview='echo {-3} | sed "s/\"//g" | xargs cat'
     post_operations:
         enter:
             - pipe: awk '{print $1}'
+            - join
+            - pipe: awk 'BEGIN {print "select"} {print}'
+        alt-d:
+            - pipe: awk '{print $1}'
+            - join
+            - pipe: awk 'BEGIN {print "diff"} {print}'
