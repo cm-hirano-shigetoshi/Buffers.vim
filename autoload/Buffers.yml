@@ -1,0 +1,8 @@
+base_task:
+    source: cat -
+    options:
+        - reverse
+        - preview='echo {-3} | sed "s/\"//g" | xargs cat'
+    post_operations:
+        enter:
+            - pipe: awk '{print $1}'
