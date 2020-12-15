@@ -3,7 +3,7 @@ base_task:
     options:
         - multi
         - reverse
-        - preview='echo {-3} | sed "s/\"//g" | xargs cat'
+        - preview='echo {-3} | sed "s/\"//g" | xargs eval cat'
     post_operations:
         enter:
             - pipe: awk '{print $1}'
