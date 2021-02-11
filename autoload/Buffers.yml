@@ -15,3 +15,7 @@ base_task:
             - pipe: awk '{print "#"$1}'
             - join: ','
             - pipe: awk 'BEGIN {print "diff"} {print}'
+        alt-q:
+            - pipe: awk '{print $1}'
+            - join
+            - pipe: awk 'BEGIN {print "quit"} {print}'

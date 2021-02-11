@@ -13,7 +13,7 @@ function! Buffers#Buffers()
             for num in split(a:lines[1], ' ')
                 execute("b " . num)
             endfor
-        elseif a:lines[0] == 'delete'
+        elseif a:lines[0] == 'quit'
             execute("bd " . a:lines[1])
         elseif a:lines[0] == 'diff'
             if len(split(a:lines[1], ',')) == 1
