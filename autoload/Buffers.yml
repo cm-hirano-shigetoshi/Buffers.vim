@@ -5,6 +5,7 @@ base_task:
         - reverse
         - preview='echo {-3} | sed "s/\"//g" | python {{tool_dir}}/main/path.py | xargs cat'
         - nth=-3
+        - height=9999
     post_operations:
         enter:
             - pipe: awk '{print $1}'
